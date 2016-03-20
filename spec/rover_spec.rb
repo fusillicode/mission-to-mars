@@ -40,9 +40,26 @@ describe Rover do
     end
   end
 
-  # describe '#deploy_on' do
-  #   let(:subject) { described_class.new('1 2 N') }
+  describe '#execute' do
+    let(:subject) { described_class.new('1 2 N') }
 
-  #   it { expect(subject.deploy_on).to eq plateau }
-  # end
+    it do
+      expect { subject.execute }
+        .to raise_error(ArgumentError)
+        .with_message /wrong number of arguments/
+    end
+
+    it do
+      expect { subject.execute 'MMLLMMLL' }
+        .to raise_error(InvalidPosition)
+        .with_message /Not yet deployed on plateau/
+    end
+
+    # it do
+    #   subject.deploy_on(Plateau.new('spec/fixtures/valid_mission'))
+    #   expect { subject.execute 'MMLLMMLL' }
+    #     .to raise_error(InvalidPosition)
+    #     .with_message /Invalid position on plateau/
+    # end
+  end
 end
