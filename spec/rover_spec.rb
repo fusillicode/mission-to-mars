@@ -93,15 +93,25 @@ describe Rover do
 
     context 'when everything is fine' do
       let(:plateau) { Plateau.new('spec/fixtures/valid_mission') }
-      let(:subject) { described_class.new('1 2 N').tap { |rover| rover.deploy_on plateau } }
+      let(:first_subject) { described_class.new('1 2 N').tap { |rover| rover.deploy_on plateau } }
+      let(:second_subject) { described_class.new('3 3 E').tap { |rover| rover.deploy_on plateau } }
 
-      it { expect { subject.execute 'LMLMLMLMM' }.not_to raise_error }
-      it { expect(subject.execute 'LMLMLMLMM').to eq subject }
+      it { expect { first_subject.execute 'LMLMLMLMM' }.not_to raise_error }
+      it { expect(first_subject.execute 'LMLMLMLMM').to eq first_subject }
       it do
-        subject.execute 'LMLMLMLMM'
-        expect(subject.x).to eq 1
-        expect(subject.y).to eq 3
-        expect(subject.direction).to eq 'N'
+        first_subject.execute 'LMLMLMLMM'
+        expect(first_subject.x).to eq 1
+        expect(first_subject.y).to eq 3
+        expect(first_subject.direction).to eq 'N'
+      end
+
+      it { expect { second_subject.execute 'MMRMMRMRRM' }.not_to raise_error }
+      it { expect(second_subject.execute 'MMRMMRMRRM').to eq second_subject }
+      it do
+        second_subject.execute 'MMRMMRMRRM'
+        expect(second_subject.x).to eq 5
+        expect(second_subject.y).to eq 1
+        expect(second_subject.direction).to eq 'E'
       end
     end
   end

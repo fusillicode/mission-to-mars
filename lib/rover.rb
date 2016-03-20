@@ -57,11 +57,11 @@ class Rover
   end
 
   def rotate(command)
-    valid_directions.each_with_index do |d, i|
-      index = command ? i + 1 : i - 1
-      index = index < 0 ? 3 : (index > 3 ? 0 : index)
-      if @direction == d
-        @direction = valid_directions[index]
+    valid_directions.each_with_index do |direction, index|
+      new_index = (command == 'R') ? index + 1 : index - 1
+      new_index = new_index < 0 ? 3 : (new_index > 3 ? 0 : new_index)
+      if @direction == direction
+        @direction = valid_directions[new_index]
         break
       end
     end
