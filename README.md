@@ -1,4 +1,4 @@
-## General Info
+## Mission to Mars
 
 To run application:
 ```
