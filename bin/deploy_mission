@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+# require_relative '../lib/plateau'
+# require_relative '../lib/rover_squad'
+# require_relative '../lib/nasa'
+
+# plateau = Plateau.new('mission')
+# rover_squad = RoverSquad.new('mission')
+# Nasa.deploy rover_squad, plateau
