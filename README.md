@@ -1,4 +1,18 @@
-## Problem Objective
+## General Info
+
+To run application:
+```
+chmod +x bin/deploy_mission
+bin/deploy_mission
+```
+
+To run tests:
+```
+bundle
+rspec
+```
+
+### Problem Objective
 
 A squad of robotic rovers are to be landed by NASA on a plateau on Mars.
 
