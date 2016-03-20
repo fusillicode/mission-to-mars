@@ -9,14 +9,14 @@ describe Plateau do
     it do
       allow(File).to receive(:open).with('dummy_file_path').and_return(['1 2 3'])
       expect { described_class.new('dummy_file_path') }
-        .to raise_error(InvalidCoordinates)
+        .to raise_error(TwoDimensional::InvalidCoordinates)
         .with_message /Incorrect number of coordinates/
     end
 
     it do
       allow(File).to receive(:open).with('dummy_file_path').and_return(['N 3'])
       expect { described_class.new('dummy_file_path') }
-        .to raise_error(InvalidCoordinates)
+        .to raise_error(TwoDimensional::InvalidCoordinates)
         .with_message /No digit coordinates/
     end
 

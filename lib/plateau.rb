@@ -1,4 +1,8 @@
+require_relative 'concerns/two_dimensional.rb'
+
 class Plateau
+  include TwoDimensional
+
   attr_reader :top_right_coordinates, :bottom_left_coordinates
 
   def initialize(mission_file_path)
@@ -19,10 +23,6 @@ class Plateau
     Array.new dimensions_number, 0
   end
 
-  def dimensions_number
-    2
-  end
-
   private
 
   def extract_bottom_left_coordinates
@@ -37,15 +37,6 @@ class Plateau
         .map &:to_i
   end
 
-  def check_coordinates(coordinates)
-    raise InvalidCoordinates.new('Incorrect number of coordinates') if coordinates.size != dimensions_number
-    raise InvalidCoordinates.new('No digit coordinates') if no_digit_coordinates?(coordinates)
-  end
-
-  def no_digit_coordinates?(coordinates)
-    coordinates.map { |c| c =~ /[[:alpha:]]/ }.any?
-  end
-
   def valid?
     top_right_coordinates[0] >= bottom_left_coordinates[0] &&
       top_right_coordinates[1] >= bottom_left_coordinates[1]
@@ -53,4 +44,3 @@ class Plateau
 end
 
 class InvalidPlateau < StandardError; end
-class InvalidCoordinates < StandardError; end
