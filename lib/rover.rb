@@ -11,7 +11,7 @@ class Rover
     @direction = extract_direction(start_configuration)
   end
 
-  def deploy_on plateau
+  def deploy_on(plateau)
     @plateau = plateau
     self
   end
@@ -47,7 +47,7 @@ class Rover
 
   private
 
-  def execute_single_command command
+  def execute_single_command(command)
     raise InvalidCommand.new('Invalid command') unless valid_command? command
     if rotation_commands.include? command
       rotate(command)
@@ -56,7 +56,7 @@ class Rover
     end
   end
 
-  def rotate command
+  def rotate(command)
     valid_directions.each_with_index do |d, i|
       index = command ? i + 1 : i - 1
       index = index < 0 ? 3 : (index > 3 ? 0 : index)
@@ -67,14 +67,14 @@ class Rover
     end
   end
 
-  def move(step = 1)
+  def move(_step = 1)
     @y = y + 1 if direction == 'N'
     @x = x + 1 if direction == 'E'
     @y = y - 1 if direction == 'S'
     @x = x - 1 if direction == 'W'
   end
 
-  def parse_start_configuration start_configuration
+  def parse_start_configuration(start_configuration)
     raise InvalidStartConfiguration unless start_configuration.respond_to? :split
     start_configuration.split(' ')
   end
@@ -92,11 +92,11 @@ class Rover
       .tap { |direction| check_direction direction }
   end
 
-  def extract_commands commands
+  def extract_commands(commands)
     commands.strip.chars
   end
 
-  def check_direction direction
+  def check_direction(direction)
     raise InvalidDirection.new unless valid_direction? direction
   end
 
@@ -104,11 +104,11 @@ class Rover
     plateau.x_range.include?(x) && plateau.y_range.include?(y)
   end
 
-  def valid_command? command
+  def valid_command?(command)
     valid_commands.include? command
   end
 
-  def valid_direction? direction
+  def valid_direction?(direction)
     valid_directions.include? direction
   end
 end
